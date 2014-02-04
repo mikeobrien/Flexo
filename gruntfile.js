@@ -4,7 +4,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-nunit-runner');
 
     grunt.registerTask('default', ['msbuild', 'nunit']);
-    grunt.registerTask('deploy', ['assemblyinfo', 'msbuild', 'nunit']);
+    grunt.registerTask('deploy', ['assemblyinfo', 'msbuild', 'nunit', 'nugetpack', 'nugetpush']);
 
     grunt.initConfig({
         assemblyinfo: {
@@ -28,6 +28,22 @@ module.exports = function(grunt) {
             options: {
                 files: ['src/Flexo.sln'],
                 teamcity: true
+            }
+        },
+        nugetpack: {
+            dist: {
+                src: 'Flexo.nuspec',
+                options: {
+                    version: process.env.BUILD_NUMBER
+                }
+            }
+        },
+        nugetpush: {
+            dist: {
+                src: 'Flexo.nupkg',
+                options: {
+                    apiKey: process.env.NUGET_API_KEY
+                }
             }
         }
     });

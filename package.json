@@ -6,5 +6,8 @@
     "grunt-msbuild": "~0.1.9",
     "grunt-dotnet-assembly-info": "~1.0.9",
     "grunt-nunit-runner": "~1.0.13"
+  },
+  "devDependencies": {
+    "grunt-nuget": "~0.1.1"
   }
 }
