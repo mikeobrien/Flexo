@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
    <metadata>
       <id>flexo</id>
-      <version></version>
+      <version>0.0.0.0</version>
       <title>Flexo</title>
       <authors>Mike O'Brien</authors>
       <description>Flexo is a simple JSON parser/encoder for .NET and Mono.</description>
@@ -15,8 +15,8 @@
       <summary>Flexo is a simple JSON parser/encoder for .NET and Mono.</summary>
       <iconUrl>https://github.com/mikeobrien/Flexo/raw/master/misc/logo.png</iconUrl>
       <tags>json</tags>
-      <files>
-         <file src="src\Flexo\bin\Release\Flexo.*" target="lib" />
-      </files>
    </metadata>
+   <files>
+      <file src="src\Flexo\bin\Release\Flexo.*" target="lib" />
+   </files>
 </package>

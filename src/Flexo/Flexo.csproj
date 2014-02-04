@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Exceptions.cs" />
-    <Compile Include="Extensions.cs" />
+    <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="IJsonEncoder.cs" />
     <Compile Include="IJsonParser.cs" />
     <Compile Include="JElement.cs" />

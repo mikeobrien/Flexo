@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace Flexo
+namespace Flexo.Extensions
 {
     public static class Extensions
     {

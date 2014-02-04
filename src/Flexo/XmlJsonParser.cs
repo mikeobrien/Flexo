@@ -4,6 +4,7 @@ using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
+using Flexo.Extensions;
 
 namespace Flexo
 {

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Xml.Linq;
 using System.Xml.XPath;
 using Flexo;
+using Flexo.Extensions;
 using NUnit.Framework;
 using Should;
 

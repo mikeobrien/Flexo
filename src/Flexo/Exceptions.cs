@@ -1,4 +1,5 @@
 ﻿using System;
+using Flexo.Extensions;
 
 namespace Flexo
 {
