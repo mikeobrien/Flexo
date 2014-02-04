@@ -8,7 +8,7 @@ Flexo is a simple JSON parser/encoder for .NET and Mono.
 Install
 ------------
 
-Bender can be found on nuget:
+Flexo can be found on nuget:
 
     PM> Install-Package Flexo
 

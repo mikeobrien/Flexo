@@ -16,21 +16,33 @@ namespace Tests
         public void should_fail_on_unclosed_outer_object()
         {
             var exception = Assert.Throws<JsonParseException>(() => _parser.Parse("{".ToStream()));
+            #if __MonoCS__
+            exception.Message.ShouldEqual("1 missing end of arrays or objects (1,2)");
+            #else 
             exception.Message.ShouldEqual("Unexpected end of file. Following elements are not closed: root.");
+            #endif
         }
 
         [Test]
         public void should_fail_on_missing_token()
         {
             var exception = Assert.Throws<JsonParseException>(() => _parser.Parse("{ \"yada\" }".ToStream()));
+            #if __MonoCS__
+            exception.Message.ShouldEqual("':' is expected after a name of an object content (1,10)");
+            #else
             exception.Message.ShouldEqual("The token ':' was expected but found '}'.");
+            #endif
         }
 
         [Test]
         public void should_fail_on_unclosed_nested_array()
         {
             var exception = Assert.Throws<JsonParseException>(() => _parser.Parse("{ \"yada\": [ }".ToStream()));
+            #if __MonoCS__
+            exception.Message.ShouldEqual("Unexpected end of object (1,13)");
+            #else
             exception.Message.ShouldEqual("Encountered unexpected character '}'.");
+            #endif
         }
 
         // Empty root object
