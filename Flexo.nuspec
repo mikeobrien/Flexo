@@ -5,14 +5,14 @@
       <version>0.0.0.0</version>
       <title>Flexo</title>
       <authors>Mike O'Brien</authors>
-      <description>Flexo is a simple JSON parser/encoder for .NET and Mono.</description>
+      <description>Simple JSON parser/encoder for .NET and Mono.</description>
       <releaseNotes />
       <copyright />
       <language>en-US</language>
       <licenseUrl>https://github.com/mikeobrien/Flexo/blob/master/LICENSE</licenseUrl>
       <projectUrl>https://github.com/mikeobrien/Flexo</projectUrl>
       <owners>Mike O'Brien</owners>
-      <summary>Flexo is a simple JSON parser/encoder for .NET and Mono.</summary>
+      <summary>Simple JSON parser/encoder for .NET and Mono.</summary>
       <iconUrl>https://github.com/mikeobrien/Flexo/raw/master/misc/logo.png</iconUrl>
       <tags>json</tags>
    </metadata>
