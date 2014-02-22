@@ -21,9 +21,15 @@ namespace Tests
         }
 
         [Test]
-        public void should_encode_json()
+        public void should_encode_json_string()
         {
             JElement.Create(RootType.Object).ToString().ShouldEqual("{}");
+        }
+
+        [Test]
+        public void should_encode_json_stream()
+        {
+            JElement.Create(RootType.Object).Encode().ShouldEqual("{}");
         }
 
         // Path

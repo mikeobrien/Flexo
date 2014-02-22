@@ -175,19 +175,29 @@ namespace Flexo
             return _elements.AddItem(new JElement(this, value));
         }
 
+        public Stream Encode(bool pretty = false)
+        {
+            return Encode(Encoding.UTF8, pretty);
+        }
+
+        public Stream Encode(Encoding encoding, bool pretty = false)
+        {
+            return Encoder.Encode(this, encoding, pretty);
+        }
+
         public override string ToString()
         {
-            return Encoder.Encode(this, Encoding.UTF8);
+            return ToString(Encoding.UTF8);
         }
 
         public string ToString(bool pretty)
         {
-            return Encoder.Encode(this, Encoding.UTF8, pretty);
+            return ToString(Encoding.UTF8, pretty);
         }
 
         public string ToString(Encoding encoding, bool pretty = false)
         {
-            return Encoder.Encode(this, encoding, pretty);
+            return new StreamReader(Encoder.Encode(this, encoding, pretty)).ReadToEnd();
         }
 
         public IEnumerator<JElement> GetEnumerator()

@@ -9,13 +9,13 @@ namespace Flexo
 {
     public class XmlJsonEncoder : IJsonEncoder
     {
-        public string Encode(JElement jsonElement, Encoding encoding = null, bool pretty = false)
+        public Stream Encode(JElement jsonElement, Encoding encoding = null, bool pretty = false)
         {
             try
             {
                 var xmlElement = new XElement(XmlJson.RootElementName);
                 Save(jsonElement, xmlElement);
-                using (var stream = new MemoryStream())
+                var stream = new MemoryStream();
                 // Whitespace is only supported in >= 4.5:
                 // using (var writer = JsonReaderWriterFactory.CreateJsonWriter(stream, encoding, false, pretty))
                 using (var writer = JsonReaderWriterFactory.CreateJsonWriter(stream, encoding ?? Encoding.UTF8, false))
@@ -23,7 +23,7 @@ namespace Flexo
                     xmlElement.Save(writer);
                     writer.Flush();
                     stream.Position = 0;
-                    return new StreamReader(stream).ReadToEnd();
+                    return stream;
                 }
             }
             catch (Exception exception)
