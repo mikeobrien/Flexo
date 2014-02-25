@@ -50,8 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions.cs" />
-    <Compile Include="JsonElementTestExtensions.cs" />
-    <Compile Include="JsonElementTests.cs" />
+    <Compile Include="JElementTestExtensions.cs" />
+    <Compile Include="JElementTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XmlJsonEncoderTests.cs" />
     <Compile Include="ExtensionTests.cs" />

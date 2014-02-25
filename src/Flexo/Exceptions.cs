@@ -21,6 +21,12 @@ namespace Flexo
             base("The root element and array elements are not named.") { }
     }
 
+    public class JsonUnnamedElementsNotSupportedException : JsonException
+    {
+        public JsonUnnamedElementsNotSupportedException() :
+            base("Only named elements supported on object nodes.") { }
+    }
+
     public class JsonValueNotSupportedException : JsonException
     {
         public JsonValueNotSupportedException(ElementType type) :

@@ -13,7 +13,7 @@ namespace Tests
         [Test]
         public void should_create_empty_root_object()
         {
-            _encoder.Encode(new JElement(RootType.Object)).ShouldEqual("{}");
+            _encoder.Encode(new JElement(ElementType.Object)).ShouldEqual("{}");
         }
 
         // Empty root array
@@ -21,7 +21,7 @@ namespace Tests
         [Test]
         public void should_create_empty_root_array()
         {
-            _encoder.Encode(new JElement(RootType.Array)).ShouldEqual("[]");
+            _encoder.Encode(new JElement(ElementType.Array)).ShouldEqual("[]");
         }
 
         // String values
@@ -29,7 +29,7 @@ namespace Tests
         [Test]
         public void should_set_field_string_value()
         {
-            var element = new JElement(RootType.Object);
+            var element = new JElement(ElementType.Object);
             element.AddValueMember("field1", "hai");
             element.AddValueMember("field2", 'y');
             _encoder.Encode(element).ShouldEqual("{\"field1\":\"hai\",\"field2\":\"y\"}");
@@ -38,7 +38,7 @@ namespace Tests
         [Test]
         public void should_set_array_string_elements()
         {
-            var element = new JElement(RootType.Array);
+            var element = new JElement(ElementType.Array);
             element.Type = ElementType.Array;
             element.AddArrayValueElement("hai");
             element.AddArrayValueElement('y');
@@ -50,7 +50,7 @@ namespace Tests
         [Test]
         public void should_set_field_number_values()
         {
-            var element = new JElement(RootType.Object);
+            var element = new JElement(ElementType.Object);
             element.AddValueMember("field1", (decimal)1.1);
             element.AddValueMember("field2", (float)2.2);
             element.AddValueMember("field3", (double)3.3);
@@ -80,7 +80,7 @@ namespace Tests
         [Test]
         public void should_set_array_number_elements()
         {
-            var element = new JElement(RootType.Array);
+            var element = new JElement(ElementType.Array);
             element.Type = ElementType.Array;
             element.AddArrayValueElement((decimal)1.1);
             element.AddArrayValueElement((float)2.2);
@@ -101,7 +101,7 @@ namespace Tests
         [Test]
         public void should_set_field_bool_value()
         {
-            var element = new JElement(RootType.Object);
+            var element = new JElement(ElementType.Object);
             element.AddValueMember("field1", true);
             _encoder.Encode(element).ShouldEqual("{\"field1\":true}");
         }
@@ -109,7 +109,7 @@ namespace Tests
         [Test]
         public void should_set_array_bool_element()
         {
-            var element = new JElement(RootType.Array);
+            var element = new JElement(ElementType.Array);
             element.AddArrayValueElement(true);
             _encoder.Encode(element).ShouldEqual("[true]");
         }
@@ -119,7 +119,7 @@ namespace Tests
         [Test]
         public void should_set_field_null_value()
         {
-            var element = new JElement(RootType.Object);
+            var element = new JElement(ElementType.Object);
             element.AddValueMember("field1", null);
             _encoder.Encode(element).ShouldEqual("{\"field1\":null}");
         }
@@ -127,7 +127,7 @@ namespace Tests
         [Test]
         public void should_set_array_null_element()
         {
-            var element = new JElement(RootType.Array);
+            var element = new JElement(ElementType.Array);
             element.AddArrayValueElement(null);
             _encoder.Encode(element).ShouldEqual("[null]");
         }
@@ -137,7 +137,7 @@ namespace Tests
         [Test]
         public void should_set_field_empty_array_value()
         {
-            var element = new JElement(RootType.Object);
+            var element = new JElement(ElementType.Object);
             element.AddMember("field1", ElementType.Array);
             _encoder.Encode(element).ShouldEqual("{\"field1\":[]}");
         }
@@ -145,7 +145,7 @@ namespace Tests
         [Test]
         public void should_set_array_empty_array_element()
         {
-            var element = new JElement(RootType.Array);
+            var element = new JElement(ElementType.Array);
             element.AddArrayElement(ElementType.Array);
             _encoder.Encode(element).ShouldEqual("[[]]");
         }
@@ -153,7 +153,7 @@ namespace Tests
         [Test]
         public void should_set_field_array_value()
         {
-            var element = new JElement(RootType.Object);
+            var element = new JElement(ElementType.Object);
             var array = element.AddMember("field1", ElementType.Array);
             array.AddArrayValueElement(1);
             array.AddArrayValueElement("hai");
@@ -163,7 +163,7 @@ namespace Tests
         [Test]
         public void should_set_array_array_element()
         {
-            var element = new JElement(RootType.Array);
+            var element = new JElement(ElementType.Array);
             var array = element.AddArrayElement(ElementType.Array);
             array.AddArrayValueElement(1);
             array.AddArrayValueElement("hai");
@@ -175,7 +175,7 @@ namespace Tests
         [Test]
         public void should_set_field_empty_object_value()
         {
-            var element = new JElement(RootType.Object);
+            var element = new JElement(ElementType.Object);
             element.AddMember("field1", ElementType.Object);
             _encoder.Encode(element).ShouldEqual("{\"field1\":{}}");
         }
@@ -183,7 +183,7 @@ namespace Tests
         [Test]
         public void should_set_array_empty_object_element()
         {
-            var element = new JElement(RootType.Array);
+            var element = new JElement(ElementType.Array);
             element.AddArrayElement(ElementType.Object);
             _encoder.Encode(element).ShouldEqual("[{}]");
         }
@@ -191,7 +191,7 @@ namespace Tests
         [Test]
         public void should_set_field_object_value()
         {
-            var element = new JElement(RootType.Object);
+            var element = new JElement(ElementType.Object);
             var @object = element.AddMember("field1", ElementType.Object);
             @object.AddValueMember("field2", 1);
             @object.AddValueMember("field3", "hai");
@@ -201,7 +201,7 @@ namespace Tests
         [Test]
         public void should_set_array_object_element()
         {
-            var element = new JElement(RootType.Array);
+            var element = new JElement(ElementType.Array);
             var @object = element.AddArrayElement(ElementType.Object);
             @object.AddValueMember("field2", 1);
             @object.AddValueMember("field3", "hai");
@@ -213,7 +213,7 @@ namespace Tests
         [Test]
         public void should_set_multiple_fields()
         {
-            var element = new JElement(RootType.Object);
+            var element = new JElement(ElementType.Object);
             element.AddValueMember("field1", "oh");
             element.AddValueMember("field2", "hai");
             _encoder.Encode(element).ShouldEqual("{\"field1\":\"oh\",\"field2\":\"hai\"}");
@@ -222,7 +222,7 @@ namespace Tests
         [Test]
         public void should_set_multiple_array_elements()
         {
-            var element = new JElement(RootType.Array);
+            var element = new JElement(ElementType.Array);
             element.AddArrayValueElement("oh");
             element.AddArrayValueElement("hai");
             _encoder.Encode(element).ShouldEqual("[\"oh\",\"hai\"]");
@@ -233,7 +233,7 @@ namespace Tests
         [Test, Ignore("Whitespace is not supported in 4.0 but is supported in 4.5.")]
         public void should_save_with_whitespace()
         {
-            var element = new JElement(RootType.Object);
+            var element = new JElement(ElementType.Object);
             element.AddValueMember("field1", "hai");
             _encoder.Encode(element).ShouldEqual("{\r\n  \"field1\": \"hai\"\r\n}");
         }

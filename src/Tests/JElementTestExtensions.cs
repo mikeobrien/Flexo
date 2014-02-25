@@ -4,7 +4,7 @@ using Should;
 
 namespace Tests
 {
-    public static class JsonElementTestExtensions
+    public static class JElementTestExtensions
     {
         public static JElement ShouldBeRoot(this JElement element)
         {
@@ -145,17 +145,17 @@ namespace Tests
             return element.ShouldBeAJsonValueArrayElement(ElementType.Null, null);
         }
 
-        public static JElement ShouldBeAJsonStringValueArrayElement(this JElement element, string value)
+        public static JElement ShouldBeAJsonStringValueArrayElement(this JElement element, string value = null)
         {
             return element.ShouldBeAJsonValueArrayElement(ElementType.String, value);
         }
 
-        public static JElement ShouldBeAJsonBoolValueArrayElement(this JElement element, bool value)
+        public static JElement ShouldBeAJsonBoolValueArrayElement(this JElement element, bool? value = null)
         {
             return element.ShouldBeAJsonValueArrayElement(ElementType.Boolean, value);
         }
 
-        public static JElement ShouldBeAJsonNumberValueArrayElement(this JElement element, decimal value)
+        public static JElement ShouldBeAJsonNumberValueArrayElement(this JElement element, decimal? value = null)
         {
             return element.ShouldBeAJsonValueArrayElement(ElementType.Number, value);
         }
@@ -170,17 +170,17 @@ namespace Tests
             return element.ShouldBeAJsonValueField(ElementType.Null, name);
         }
 
-        public static JElement ShouldBeAJsonStringValueField(this JElement element, string name, string value)
+        public static JElement ShouldBeAJsonStringValueField(this JElement element, string name, string value = null)
         {
             return element.ShouldBeAJsonValueField(ElementType.String, name, value);
         }
 
-        public static JElement ShouldBeAJsonBoolValueField(this JElement element, string name, bool value)
+        public static JElement ShouldBeAJsonBoolValueField(this JElement element, string name, bool? value = null)
         {
             return element.ShouldBeAJsonValueField(ElementType.Boolean, name, value);
         }
 
-        public static JElement ShouldBeAJsonNumberValueField(this JElement element, string name, decimal value)
+        public static JElement ShouldBeAJsonNumberValueField(this JElement element, string name, decimal? value = null)
         {
             return element.ShouldBeAJsonValueField(ElementType.Number, name, value);
         }

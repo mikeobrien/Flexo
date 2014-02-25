@@ -43,13 +43,13 @@ namespace Flexo
             }
         }
 
-        private static RootType GetRootType(XElement xmlElement)
+        private static ElementType GetRootType(XElement xmlElement)
         {
             var elementType = GetElementType(xmlElement);
             switch (elementType)
             {
-                case ElementType.Object: return RootType.Object;
-                case ElementType.Array: return RootType.Array;
+                case ElementType.Object: return ElementType.Object;
+                case ElementType.Array: return ElementType.Array;
                 default: throw new JsonParseException("'{0}' is not a valid json root element type. " +
                     "The root can only be an object or array.".ToFormat(elementType));
             }

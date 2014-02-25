@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -7,8 +8,8 @@ using Flexo.Extensions;
 
 namespace Flexo
 {
-    public enum RootType { Object, Array }
     public enum ElementType { Null, String, Number, Boolean, Array, Object }
+    public enum ValueElementType { String, Number, Boolean }
 
     public class JElement : IEnumerable<JElement>
     {
@@ -19,9 +20,29 @@ namespace Flexo
         private string _name;
         private object _value;
 
-        public JElement(RootType type)
+        public JElement(ElementType type)
         {
-            Type = type == RootType.Array ? ElementType.Array : ElementType.Object;
+            Type = type;
+        }
+
+        public JElement(string name, ElementType type)
+        {
+
+            _name = name;
+            Type = type;
+        }
+
+        public JElement(object value, ValueElementType type)
+        {
+            _value = value;
+            Type = type.ToElementType();
+        }
+
+        public JElement(string name, object value, ValueElementType type)
+        {
+            _name = name;
+            _value = value;
+            Type = type.ToElementType();
         }
 
         private JElement(JElement parent, ElementType type)
@@ -49,7 +70,7 @@ namespace Flexo
             Name = name;
         }
 
-        public static JElement Create(RootType type)
+        public static JElement Create(ElementType type)
         {
             return new JElement(type);
         }
@@ -71,7 +92,7 @@ namespace Flexo
 
         public ElementType Type { get; set; }
 
-        public JElement Parent { get; private set; }
+        public JElement Parent { get; protected set; }
         public bool HasParent { get { return Parent != null; } }
         public bool IsRoot { get { return !HasParent; } }
 
@@ -81,7 +102,7 @@ namespace Flexo
         public bool IsArray { get { return Type == ElementType.Array; } }
         public bool IsArrayElement { get { return HasParent && Parent.IsArray; } }
 
-        public bool IsNamed { get { return HasParent && Parent.IsObject; } }
+        public bool IsNamed { get { return (HasParent && Parent.IsObject) || !string.IsNullOrEmpty(_name); } }
 
         public bool IsValue { get { return !IsObject && !IsArray; } }
         public bool IsNull { get { return IsValue && Type == ElementType.Null; } }
@@ -149,6 +170,20 @@ namespace Flexo
                 if (!IsObject) throw new JsonMemberNotSupportedException(Type);
                 return this.FirstOrDefault(x => x.Name == name);
             }
+        }
+
+        public bool CanInsert(JElement element)
+        {
+            return !IsValue && (IsArray || (IsObject && element.IsNamed));
+        }
+
+        public JElement Insert(JElement element)
+        {
+            if (IsValue) throw new JsonElementsNotSupportedException();
+            if (IsObject && !element.IsNamed) throw new JsonUnnamedElementsNotSupportedException();
+            if (IsArray && element.IsNamed) element.Name = null;
+            element.Parent = this;
+            return _elements.AddItem(element);
         }
 
         public JElement AddMember(string name, ElementType type)
@@ -219,6 +254,20 @@ namespace Flexo
                 case ElementType.Number: return 0;
                 case ElementType.String: return "";
                 default: return null;
+            }
+        }
+    }
+
+    public static class Extenions
+    {
+        public static ElementType ToElementType(this ValueElementType type)
+        {
+            switch (type)
+            {
+                case ValueElementType.Boolean: return ElementType.Boolean;
+                case ValueElementType.Number: return ElementType.Number;
+                case ValueElementType.String: return ElementType.String;
+                default: throw new NotSupportedException();
             }
         }
     }
