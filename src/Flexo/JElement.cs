@@ -158,7 +158,7 @@ namespace Flexo
                         if (x.IsRoot) return x.Any() ? "" : "/";
                         if (x.IsNamed) return "/" + x.Name;
                     }
-                    return "[" + x.Parent.ToList().IndexOf(x) + "]";
+                    return "[" + (x.Parent.ToList().IndexOf(x) + 1) + "]";
                 }).Aggregate();
             }
         }

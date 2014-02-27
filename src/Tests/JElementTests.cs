@@ -49,12 +49,12 @@ namespace Tests
             var arrayField = element.AddMember("arrayField", ElementType.Array);
             arrayField.Path.ShouldEqual("/arrayField");
 
-            arrayField.AddArrayElement(ElementType.Boolean).Path.ShouldEqual("/arrayField[0]");
-            arrayField.AddArrayElement(ElementType.Null).Path.ShouldEqual("/arrayField[1]");
-            arrayField.AddArrayElement(ElementType.Number).Path.ShouldEqual("/arrayField[2]");
-            arrayField.AddArrayElement(ElementType.String).Path.ShouldEqual("/arrayField[3]");
-            arrayField.AddArrayElement(ElementType.Array).Path.ShouldEqual("/arrayField[4]");
-            arrayField.AddArrayElement(ElementType.Object).Path.ShouldEqual("/arrayField[5]");
+            arrayField.AddArrayElement(ElementType.Boolean).Path.ShouldEqual("/arrayField[1]");
+            arrayField.AddArrayElement(ElementType.Null).Path.ShouldEqual("/arrayField[2]");
+            arrayField.AddArrayElement(ElementType.Number).Path.ShouldEqual("/arrayField[3]");
+            arrayField.AddArrayElement(ElementType.String).Path.ShouldEqual("/arrayField[4]");
+            arrayField.AddArrayElement(ElementType.Array).Path.ShouldEqual("/arrayField[5]");
+            arrayField.AddArrayElement(ElementType.Object).Path.ShouldEqual("/arrayField[6]");
 
             var objectField = element.AddMember("objectField", ElementType.Object);
             objectField.Path.ShouldEqual("/objectField");
@@ -74,30 +74,30 @@ namespace Tests
 
             element.Path.ShouldEqual("[]");
 
-            element.AddArrayElement(ElementType.Boolean).Path.ShouldEqual("[0]");
-            element.AddArrayElement(ElementType.Null).Path.ShouldEqual("[1]");
-            element.AddArrayElement(ElementType.Number).Path.ShouldEqual("[2]");
-            element.AddArrayElement(ElementType.String).Path.ShouldEqual("[3]");
+            element.AddArrayElement(ElementType.Boolean).Path.ShouldEqual("[1]");
+            element.AddArrayElement(ElementType.Null).Path.ShouldEqual("[2]");
+            element.AddArrayElement(ElementType.Number).Path.ShouldEqual("[3]");
+            element.AddArrayElement(ElementType.String).Path.ShouldEqual("[4]");
 
             var arrayField = element.AddArrayElement(ElementType.Array);
-            arrayField.Path.ShouldEqual("[4]");
+            arrayField.Path.ShouldEqual("[5]");
 
-            arrayField.AddArrayElement(ElementType.Boolean).Path.ShouldEqual("[4][0]");
-            arrayField.AddArrayElement(ElementType.Null).Path.ShouldEqual("[4][1]");
-            arrayField.AddArrayElement(ElementType.Number).Path.ShouldEqual("[4][2]");
-            arrayField.AddArrayElement(ElementType.String).Path.ShouldEqual("[4][3]");
-            arrayField.AddArrayElement(ElementType.Array).Path.ShouldEqual("[4][4]");
-            arrayField.AddArrayElement(ElementType.Object).Path.ShouldEqual("[4][5]");
+            arrayField.AddArrayElement(ElementType.Boolean).Path.ShouldEqual("[5][1]");
+            arrayField.AddArrayElement(ElementType.Null).Path.ShouldEqual("[5][2]");
+            arrayField.AddArrayElement(ElementType.Number).Path.ShouldEqual("[5][3]");
+            arrayField.AddArrayElement(ElementType.String).Path.ShouldEqual("[5][4]");
+            arrayField.AddArrayElement(ElementType.Array).Path.ShouldEqual("[5][5]");
+            arrayField.AddArrayElement(ElementType.Object).Path.ShouldEqual("[5][6]");
 
             var objectField = element.AddArrayElement(ElementType.Object);
-            objectField.Path.ShouldEqual("[5]");
+            objectField.Path.ShouldEqual("[6]");
 
-            objectField.AddMember("boolField2", ElementType.Boolean).Path.ShouldEqual("[5]/boolField2");
-            objectField.AddMember("nullField2", ElementType.Null).Path.ShouldEqual("[5]/nullField2");
-            objectField.AddMember("numberField2", ElementType.Number).Path.ShouldEqual("[5]/numberField2");
-            objectField.AddMember("stringField2", ElementType.String).Path.ShouldEqual("[5]/stringField2");
-            objectField.AddMember("arrayField2", ElementType.Array).Path.ShouldEqual("[5]/arrayField2");
-            objectField.AddMember("objectField2", ElementType.Object).Path.ShouldEqual("[5]/objectField2");
+            objectField.AddMember("boolField2", ElementType.Boolean).Path.ShouldEqual("[6]/boolField2");
+            objectField.AddMember("nullField2", ElementType.Null).Path.ShouldEqual("[6]/nullField2");
+            objectField.AddMember("numberField2", ElementType.Number).Path.ShouldEqual("[6]/numberField2");
+            objectField.AddMember("stringField2", ElementType.String).Path.ShouldEqual("[6]/stringField2");
+            objectField.AddMember("arrayField2", ElementType.Array).Path.ShouldEqual("[6]/arrayField2");
+            objectField.AddMember("objectField2", ElementType.Object).Path.ShouldEqual("[6]/objectField2");
         }
 
         // Create
