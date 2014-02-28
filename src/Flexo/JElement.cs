@@ -82,7 +82,7 @@ namespace Flexo
 
         public static JElement Load(byte[] bytes, Encoding encoding = null)
         {
-            return Parser.Parse(new MemoryStream(bytes));
+            return Parser.Parse(new MemoryStream(bytes), encoding);
         }
 
         public static JElement Load(Stream stream, Encoding encoding = null)

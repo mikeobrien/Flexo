@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.IO;
+using System.Linq;
+using System.Text;
 using Flexo;
 using NUnit.Framework;
 using Should;
@@ -11,9 +13,52 @@ namespace Tests
         // Parse/Encode
 
         [Test]
-        public void should_parse_json()
+        public void should_parse_json_string()
         {
             var element = JElement.Load("{}");
+
+            element.ShouldBeRoot();
+            element.ShouldBeAJsonObject();
+            element.ShouldBeEmpty();
+        }
+
+        private readonly static byte[] JsonBytesUtf8 = Encoding.UTF8.GetBytes("{}");
+        private readonly static byte[] JsonBytesUnicode = Encoding.BigEndianUnicode.GetBytes("{}");
+
+        [Test]
+        public void should_parse_with_json_bytes()
+        {
+            var element = JElement.Load(JsonBytesUtf8);
+
+            element.ShouldBeRoot();
+            element.ShouldBeAJsonObject();
+            element.ShouldBeEmpty();
+        }
+
+        [Test]
+        public void should_parse_with_json_bytes_with_specified_encoding()
+        {
+            var element = JElement.Load(JsonBytesUnicode, Encoding.BigEndianUnicode);
+
+            element.ShouldBeRoot();
+            element.ShouldBeAJsonObject();
+            element.ShouldBeEmpty();
+        }
+
+        [Test]
+        public void should_parse_with_json_stream()
+        {
+            var element = JElement.Load(new MemoryStream(JsonBytesUtf8));
+
+            element.ShouldBeRoot();
+            element.ShouldBeAJsonObject();
+            element.ShouldBeEmpty();
+        }
+
+        [Test]
+        public void should_parse_with_json_stream_with_specified_encoding()
+        {
+            var element = JElement.Load(new MemoryStream(JsonBytesUnicode), Encoding.BigEndianUnicode);
 
             element.ShouldBeRoot();
             element.ShouldBeAJsonObject();
