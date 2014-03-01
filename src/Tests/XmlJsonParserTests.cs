@@ -67,6 +67,18 @@ namespace Tests
             element.Type.ShouldEqual(ElementType.Array);
         }
 
+        // Field names
+
+        [Test]
+        public void should_parse_field_names_with_non_alpha_numeric_chars()
+        {
+            var children = _parser.Parse("{ \"$field1\": \"hai\" }".ToStream()).ToList();
+            children.Count.ShouldEqual(1);
+            children[0].Name.ShouldEqual("$field1");
+            children[0].Value.ShouldEqual("hai");
+            children[0].Type.ShouldEqual(ElementType.String);
+        }
+
         // String values
 
         [Test]

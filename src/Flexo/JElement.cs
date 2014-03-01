@@ -151,12 +151,12 @@ namespace Flexo
                     if (x.Type == ElementType.Array)
                     {
                         if (x.IsRoot) return x.Any() ? "" : "[]";
-                        if (x.IsNamed) return (x.Parent.IsArray ? "" : "/") + x.Name;
+                        if (x.IsNamed) return (x.Parent.IsArray || x.Parent.IsRoot ? "" : ".") + x.Name;
                     }
                     else
                     {
-                        if (x.IsRoot) return x.Any() ? "" : "/";
-                        if (x.IsNamed) return "/" + x.Name;
+                        if (x.IsRoot) return "";
+                        if (x.IsNamed) return (x.Parent.IsRoot ? "" : ".") + x.Name;
                     }
                     return "[" + (x.Parent.ToList().IndexOf(x) + 1) + "]";
                 }).Aggregate();

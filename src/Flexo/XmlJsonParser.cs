@@ -29,7 +29,12 @@ namespace Flexo
         {
             if (jsonElement.IsValue) jsonElement.Value = ParseJsonValue(xmlElement, jsonElement.Type);
             else xmlElement.Elements().ForEach(x => Load(jsonElement.Type == ElementType.Array ? jsonElement.AddArrayElement(GetElementType(x)) :
-                jsonElement.AddMember(x.Name.LocalName, GetElementType(x)), x));
+                jsonElement.AddMember(GetName(x), GetElementType(x)), x));
+        }
+
+        private static string GetName(XElement element)
+        {
+            return element.Attribute("item") != null ? element.Attribute("item").Value : element.Name.LocalName;
         }
 
         private static object ParseJsonValue(XElement xmleElement, ElementType type)
