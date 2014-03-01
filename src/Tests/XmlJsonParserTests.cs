@@ -1,7 +1,12 @@
-﻿using System.Linq;
+﻿using System.IO;
+using System.Linq;
+using System.Text;
+using System.Xml;
+using System.Xml.Linq;
 using Flexo;
 using NUnit.Framework;
 using Should;
+using System.Runtime.Serialization.Json;
 
 namespace Tests
 {
@@ -68,15 +73,37 @@ namespace Tests
         }
 
         // Field names
-
+        
         [Test]
         public void should_parse_field_names_with_non_alpha_numeric_chars()
         {
+            #if __MonoCS__
+            // Broken in mono as of 2.10.8.1
+            #else
             var children = _parser.Parse("{ \"$field1\": \"hai\" }".ToStream()).ToList();
             children.Count.ShouldEqual(1);
             children[0].Name.ShouldEqual("$field1");
             children[0].Value.ShouldEqual("hai");
             children[0].Type.ShouldEqual(ElementType.String);
+            #endif
+        }
+
+        [Test]
+        public void should_parse_field_names_with_illegal_xml_chars()
+        {
+            var json = new MemoryStream(Encoding.ASCII.GetBytes(
+                "{" +
+                    "\"$field1\": \"oh\"," + 
+                    "\"field2\": \"hai\"" + 
+                "}"));
+
+            var document = XDocument.Load(JsonReaderWriterFactory.CreateJsonReader(json, new XmlDictionaryReaderQuotas()));
+
+            document.ToString(SaveOptions.DisableFormatting).ShouldEqual(
+            "<root type=\"object\">" + 
+                "<a:item xmlns:a=\"item\" item=\"$field1\" type=\"string\">oh</a:item>" + 
+                "<field2 type=\"string\">hai</field2>" + 
+            "</root>");
         }
 
         // String values
