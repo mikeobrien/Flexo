@@ -79,6 +79,7 @@ namespace Tests
         {
             #if __MonoCS__
             // Broken in mono as of 2.10.8.1
+            // https://bugzilla.xamarin.com/show_bug.cgi?id=18105
             #else
             var children = _parser.Parse("{ \"$field1\": \"hai\" }".ToStream()).ToList();
             children.Count.ShouldEqual(1);
@@ -86,24 +87,6 @@ namespace Tests
             children[0].Value.ShouldEqual("hai");
             children[0].Type.ShouldEqual(ElementType.String);
             #endif
-        }
-
-        [Test]
-        public void should_parse_field_names_with_illegal_xml_chars()
-        {
-            var json = new MemoryStream(Encoding.ASCII.GetBytes(
-                "{" +
-                    "\"$field1\": \"oh\"," + 
-                    "\"field2\": \"hai\"" + 
-                "}"));
-
-            var document = XDocument.Load(JsonReaderWriterFactory.CreateJsonReader(json, new XmlDictionaryReaderQuotas()));
-
-            document.ToString(SaveOptions.DisableFormatting).ShouldEqual(
-            "<root type=\"object\">" + 
-                "<a:item xmlns:a=\"item\" item=\"$field1\" type=\"string\">oh</a:item>" + 
-                "<field2 type=\"string\">hai</field2>" + 
-            "</root>");
         }
 
         // String values
