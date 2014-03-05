@@ -77,6 +77,14 @@ namespace Tests
             JElement.Create(ElementType.Object).Encode().ShouldEqual("{}");
         }
 
+        [Test]
+        public void should_encode_json_stream_with_specified_encoding()
+        {
+            var encoded = new byte[4];
+            JElement.Create(ElementType.Object).Encode(Encoding.BigEndianUnicode).Read(encoded, 0 , 4);
+            encoded.ShouldEqual(Encoding.BigEndianUnicode.GetBytes("{}"));
+        }
+
         // Path
 
         [Test]
