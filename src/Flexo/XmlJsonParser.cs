@@ -14,7 +14,7 @@ namespace Flexo
         {
             return Load(Exception<XmlException>.Map(() =>
                 XDocument.Load(JsonReaderWriterFactory.CreateJsonReader(
-                    stream, encoding ?? Encoding.UTF8, new XmlDictionaryReaderQuotas(), x => {})),
+                    stream, encoding ?? Encoding.UTF8, new XmlDictionaryReaderQuotas(), x => { })),
                 x => new JsonParseException(x)));
         }
 

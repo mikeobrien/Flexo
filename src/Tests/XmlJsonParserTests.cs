@@ -1,12 +1,10 @@
-﻿using System.IO;
+﻿using System;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Xml;
-using System.Xml.Linq;
 using Flexo;
 using NUnit.Framework;
 using Should;
-using System.Runtime.Serialization.Json;
 
 namespace Tests
 {
@@ -355,6 +353,38 @@ namespace Tests
             children[0].IsNamed.ShouldBeFalse();
             children[1].Value.ShouldEqual("hai");
             children[1].Type.ShouldEqual(ElementType.String);
+        }
+
+        // Performance
+
+        [Test]
+        public void should_be_within_performace_tolerance()
+        {
+            var json = File.ReadAllText("model.json");
+            var jsonBytes = new MemoryStream(File.ReadAllBytes("model.json"));
+            var stopwatch = new Stopwatch();
+
+            var controlBenchmark = Enumerable.Range(1, 1000).Select(x =>
+            {
+                jsonBytes.Seek(0, SeekOrigin.Begin);
+                stopwatch.Restart();
+                json.ParseJson();
+                stopwatch.Stop();
+                return stopwatch.ElapsedTicks;
+            }).Skip(5).Average();
+
+            var flexoBenchmark = Enumerable.Range(1, 1000).Select(x =>
+            {
+                jsonBytes.Seek(0, SeekOrigin.Begin);
+                stopwatch.Restart();
+                JElement.Load(jsonBytes);
+                stopwatch.Stop();
+                return stopwatch.ElapsedTicks;
+            }).Skip(5).Average();
+
+            Console.Write("Control: {0}, Flexo: {1}", controlBenchmark, flexoBenchmark);
+
+            flexoBenchmark.ShouldBeLessThan(controlBenchmark * 1.5);
         }
     }
 }

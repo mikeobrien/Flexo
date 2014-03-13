@@ -5,6 +5,7 @@
         public const string RootElementName = "root";
         public const string ArrayItemElementName = "item";
         public const string TypeAttribute = "type";
+        public const string NameAttribute = "item";
         public const string Object = "object";
         public const string Array = "array";
         public const string Null = "null";

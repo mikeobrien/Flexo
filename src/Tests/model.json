@@ -1,0 +1,76 @@
+{
+    "City": "Hill Valley",
+    "Country": "USA",
+	"Father": 
+		{    
+			"City": "Hill Valley",
+			"Country": "USA",
+			"FirstName": "Emmet",
+			"LastName": "Brown",
+			"MiddleName": "L",
+			"Occupation": "Scientist",
+			"Phone": "Klonike 5-4385",
+			"State": "CA",
+			"Street": "1640 Riverside Dr.",
+			"Zip": "91103"
+		},
+    "FirstName": "Emmet",
+	"Friends": [
+		{    
+			"City": "Hill Valley",
+			"Country": "USA",
+			"FirstName": "Emmet",
+			"LastName": "Brown",
+			"MiddleName": "L",
+			"Occupation": "Scientist",
+			"Phone": "Klonike 5-4385",
+			"State": "CA",
+			"Street": "1640 Riverside Dr.",
+			"Zip": "91103"
+		},
+		{    
+			"City": "Hill Valley",
+			"Country": "USA",
+			"FirstName": "Emmet",
+			"LastName": "Brown",
+			"MiddleName": "L",
+			"Occupation": "Scientist",
+			"Phone": "Klonike 5-4385",
+			"State": "CA",
+			"Street": "1640 Riverside Dr.",
+			"Zip": "91103"
+		},
+		{    
+			"City": "Hill Valley",
+			"Country": "USA",
+			"FirstName": "Emmet",
+			"LastName": "Brown",
+			"MiddleName": "L",
+			"Occupation": "Scientist",
+			"Phone": "Klonike 5-4385",
+			"State": "CA",
+			"Street": "1640 Riverside Dr.",
+			"Zip": "91103"
+		}
+	],
+    "LastName": "Brown",
+    "MiddleName": "L",
+	"Mother": 
+		{    
+			"City": "Hill Valley",
+			"Country": "USA",
+			"FirstName": "Emmet",
+			"LastName": "Brown",
+			"MiddleName": "L",
+			"Occupation": "Scientist",
+			"Phone": "Klonike 5-4385",
+			"State": "CA",
+			"Street": "1640 Riverside Dr.",
+			"Zip": "91103"
+		},
+    "Occupation": "Scientist",
+    "Phone": "Klonike 5-4385",
+    "State": "CA",
+    "Street": "1640 Riverside Dr.",
+    "Zip": "91103"
+}

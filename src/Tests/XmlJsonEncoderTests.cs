@@ -1,5 +1,10 @@
-﻿using Flexo;
+﻿using System;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using Flexo;
 using NUnit.Framework;
+using Should;
 
 namespace Tests
 {
@@ -236,6 +241,36 @@ namespace Tests
             var element = new JElement(ElementType.Object);
             element.AddValueMember("field1", "hai");
             _encoder.Encode(element).ShouldEqual("{\r\n  \"field1\": \"hai\"\r\n}");
+        }
+
+        // Performance
+
+        [Test]
+        public void should_be_within_performace_tolerance()
+        {
+            var xml = File.ReadAllText("model.json").ParseJson();
+            var json = JElement.Load(File.ReadAllBytes("model.json"));
+            var stopwatch = new Stopwatch();
+
+            var controlBenchmark = Enumerable.Range(1, 1000).Select(x =>
+            {
+                stopwatch.Restart();
+                xml.EncodeJson();
+                stopwatch.Stop();
+                return stopwatch.ElapsedTicks;
+            }).Skip(5).Average();
+
+            var flexoBenchmark = Enumerable.Range(1, 1000).Select(x =>
+            {
+                stopwatch.Restart();
+                json.Encode();
+                stopwatch.Stop();
+                return stopwatch.ElapsedTicks;
+            }).Skip(5).Average();
+
+            Console.Write("Control: {0}, Flexo: {1}", controlBenchmark, flexoBenchmark);
+
+            flexoBenchmark.ShouldBeLessThan(controlBenchmark * 3);
         }
     }
 }
