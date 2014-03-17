@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Flexo;
+using Flexo.Extensions;
 using NUnit.Framework;
 using Should;
 
@@ -40,6 +41,27 @@ namespace Tests
             _encoder.Encode(element).ShouldEqual("{\"field1\":\"hai\",\"field2\":\"y\"}");
         }
 
+        /*
+            \"
+            \\
+            \/
+            \b
+            \f
+            \n
+            \r
+            \t
+            \u four-hex-digits
+         */
+
+        [Test]
+        public void should_set_escaped_field_string_value()
+        {
+            var element = new JElement(ElementType.Object);
+            element.AddValueMember("field1", DateTime.MaxValue.ToString());
+            _encoder.Encode(element).ShouldEqual("{{\"field1\":\"{0}\"}}"
+                .ToFormat(DateTime.MaxValue.ToString().Replace("/", "\\/")));
+        }
+
         [Test]
         public void should_set_array_string_elements()
         {
@@ -48,6 +70,16 @@ namespace Tests
             element.AddArrayValueElement("hai");
             element.AddArrayValueElement('y');
             _encoder.Encode(element).ShouldEqual("[\"hai\",\"y\"]");
+        }
+
+        [Test]
+        public void should_set_escaped_array_string_elements()
+        {
+            var element = new JElement(ElementType.Array);
+            element.Type = ElementType.Array;
+            element.AddArrayValueElement(DateTime.MaxValue.ToString());
+            _encoder.Encode(element).ShouldEqual("[\"{0}\"]"
+                .ToFormat(DateTime.MaxValue.ToString().Replace("/", "\\/")));
         }
 
         // Numeric values

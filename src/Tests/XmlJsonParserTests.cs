@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Flexo;
+using Flexo.Extensions;
 using NUnit.Framework;
 using Should;
 
@@ -100,12 +101,34 @@ namespace Tests
         }
 
         [Test]
+        public void should_get_field_escaped_string_value()
+        {
+            var children = _parser.Parse("{{ \"field1\": \"{0}\" }}"
+                .ToFormat(DateTime.MaxValue).ToStream()).ToList();
+            children.Count.ShouldEqual(1);
+            children[0].Name.ShouldEqual("field1");
+            children[0].Value.ShouldEqual(DateTime.MaxValue.ToString());
+            children[0].Type.ShouldEqual(ElementType.String);
+        }
+
+        [Test]
         public void should_get_array_string_value()
         {
             var children = _parser.Parse("[\"hai\"]".ToStream()).ToList();
             children.Count.ShouldEqual(1);
             children[0].IsNamed.ShouldBeFalse();
             children[0].Value.ShouldEqual("hai");
+            children[0].Type.ShouldEqual(ElementType.String);
+        }
+
+        [Test]
+        public void should_get_array_escaped_string_value()
+        {
+            var children = _parser.Parse("[\"{0}\"]"
+                .ToFormat(DateTime.MaxValue).ToStream()).ToList();
+            children.Count.ShouldEqual(1);
+            children[0].IsNamed.ShouldBeFalse();
+            children[0].Value.ShouldEqual(DateTime.MaxValue.ToString());
             children[0].Type.ShouldEqual(ElementType.String);
         }
 
