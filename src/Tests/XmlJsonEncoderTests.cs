@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Xml.Linq;
 using Flexo;
 using Flexo.Extensions;
 using NUnit.Framework;
@@ -30,6 +31,21 @@ namespace Tests
             _encoder.Encode(new JElement(ElementType.Array)).ShouldEqual("[]");
         }
 
+        // Field names
+
+        [Test]
+        public void should_encode_field_names_with_non_alpha_numeric_chars()
+        {
+            var element = new JElement(ElementType.Object);
+            element.AddValueMember("$field", "hai");
+            #if __MonoCS__
+            // Broken in mono as of 2.10.8.1
+            // https://bugzilla.xamarin.com/show_bug.cgi?id=18105
+            #else
+            _encoder.Encode(element).ShouldEqual("{\"$field\":\"hai\"}");
+            #endif
+        }
+
         // String values
 
         [Test]
@@ -40,18 +56,6 @@ namespace Tests
             element.AddValueMember("field2", 'y');
             _encoder.Encode(element).ShouldEqual("{\"field1\":\"hai\",\"field2\":\"y\"}");
         }
-
-        /*
-            \"
-            \\
-            \/
-            \b
-            \f
-            \n
-            \r
-            \t
-            \u four-hex-digits
-         */
 
         [Test]
         public void should_set_escaped_field_string_value()
@@ -302,7 +306,7 @@ namespace Tests
 
             Console.Write("Control: {0}, Flexo: {1}", controlBenchmark, flexoBenchmark);
 
-            flexoBenchmark.ShouldBeLessThan(controlBenchmark * 3);
+            flexoBenchmark.ShouldBeLessThan(controlBenchmark * 4);
         }
     }
 }

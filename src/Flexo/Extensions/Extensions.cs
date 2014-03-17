@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Xml.Linq;
 
 namespace Flexo.Extensions
@@ -59,6 +60,22 @@ namespace Flexo.Extensions
         public static string Aggregate(this IEnumerable<string> source)
         {
             return source.Aggregate((a, i) => a + i);
+        }
+
+        // http://www.w3.org/TR/REC-xml/#d0e804
+
+        private const string StartChars =
+            ":A-Z_a-z" + 
+            "\\u00C0-\\u00D6\\u00D8-\\u00F6\\u00F8-\\u02FF\\u0370-\\u037D" + 
+            "\\u037F-\\u1FFF\\u200C-\\u200D\\u2070-\\u218F\\u2C00-\\u2FEF" + 
+            "\\u3001-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFFD";
+        private const string BodyChars = StartChars + "\\-\\.0-9\\u00B7\\u0300-\\u036F\\u203F-\\u2040";
+        private const string ValidXmlName = "^[" + StartChars + "][" + BodyChars + "]*$";
+        private static readonly Regex XmlNameRegex = new Regex(ValidXmlName);
+
+        public static bool IsValidXmlName(this string name)
+        {
+            return XmlNameRegex.IsMatch(name);
         }
     }
 

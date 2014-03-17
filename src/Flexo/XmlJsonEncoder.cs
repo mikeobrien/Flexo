@@ -36,7 +36,20 @@ namespace Flexo
         {
             SetElementType(xmlElement, jsonElement.Type);
             if (jsonElement.IsValue) SetElementValue(jsonElement, xmlElement);
-            else jsonElement.ForEach(x => Save(x, xmlElement.CreateElement(jsonElement.IsArray ? XmlJson.ArrayItemElementName : x.Name)));
+            else jsonElement.ForEach(x => Save(x, CreateElement(jsonElement.IsArray, x, xmlElement)));
+        }
+
+        private static XElement CreateElement(bool isArrayItem, JElement jsonElement, XElement xmlElement)
+        {
+            var name = isArrayItem ? XmlJson.ArrayItemElementName : jsonElement.Name;
+            if (isArrayItem || name.IsValidXmlName()) return xmlElement.CreateElement(name);
+            XNamespace @namespace = XmlJson.ArrayItemElementName;
+            var child = new XElement(
+                @namespace + XmlJson.ArrayItemElementName,
+                new XAttribute(XNamespace.Xmlns + "a", XmlJson.ArrayItemElementName),
+                new XAttribute(XmlJson.ArrayItemElementName, name));
+            xmlElement.Add(child);
+            return child;
         }
 
         private static void SetElementValue(JElement jsonElement, XElement xmlElement)

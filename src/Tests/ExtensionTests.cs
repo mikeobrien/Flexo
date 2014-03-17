@@ -87,5 +87,30 @@ namespace Tests
         {
             new [] { "h", "a", "i" }.Aggregate().ShouldEqual("hai");
         }
+
+        [Test]
+        [TestCase("hai", true)]
+        [TestCase(":hai", true)]
+        [TestCase("hai.", true)]
+        [TestCase("oh.hai", true)]
+        [TestCase("hai0", true)]
+        [TestCase("oh0hai", true)]
+        [TestCase("hai-", true)]
+        [TestCase("oh-hai", true)]
+        [TestCase("_hai", true)]
+        [TestCase("OHHAI", true)]
+
+        [TestCase("", false)]
+        [TestCase("$hai", false)]
+        [TestCase("hai$", false)]
+        [TestCase("oh$hai", false)]
+        [TestCase("oh hai", false)]
+        [TestCase("0hai", false)]
+        [TestCase("-hai", false)]
+        [TestCase(".hai", false)]
+        public void should_indicate_if_xml_name_is_valid(string name, bool isValid)
+        {
+            name.IsValidXmlName().ShouldEqual(isValid);
+        }
     }
 }
