@@ -90,7 +90,6 @@ namespace Tests
 
         [Test]
         [TestCase("hai", true)]
-        [TestCase(":hai", true)]
         [TestCase("hai.", true)]
         [TestCase("oh.hai", true)]
         [TestCase("hai0", true)]
@@ -101,6 +100,8 @@ namespace Tests
         [TestCase("OHHAI", true)]
 
         [TestCase("", false)]
+        [TestCase(":hai", false)]
+        [TestCase("oh:hai", false)]
         [TestCase("$hai", false)]
         [TestCase("hai$", false)]
         [TestCase("oh$hai", false)]
