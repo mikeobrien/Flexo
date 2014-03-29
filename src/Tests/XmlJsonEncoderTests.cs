@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Xml.Linq;
 using Flexo;
 using Flexo.Extensions;
 using NUnit.Framework;
@@ -306,7 +305,7 @@ namespace Tests
 
             Console.Write("Control: {0}, Flexo: {1}", controlBenchmark, flexoBenchmark);
 
-            flexoBenchmark.ShouldBeLessThan(controlBenchmark * 4);
+            flexoBenchmark.ShouldBeLessThan(controlBenchmark * 5);
         }
     }
 }

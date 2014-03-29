@@ -78,6 +78,15 @@ namespace Tests
         }
 
         [Test]
+        public void should_encode_json_to_existing_stream()
+        {
+            var stream = new MemoryStream();
+            JElement.Create(ElementType.Object).Encode(stream);
+            stream.Seek(0, SeekOrigin.Begin);
+            new StreamReader(stream).ReadToEnd().ShouldEqual("{}");
+        }
+
+        [Test]
         public void should_encode_json_stream_with_specified_encoding()
         {
             var encoded = new byte[4];

@@ -220,6 +220,16 @@ namespace Flexo
             return Encoder.Encode(this, encoding, pretty);
         }
 
+        public void Encode(Stream stream, bool pretty = false)
+        {
+            Encoder.Encode(this, stream, Encoding.UTF8, pretty);
+        }
+
+        public void Encode(Stream stream, Encoding encoding, bool pretty = false)
+        {
+            Encoder.Encode(this, stream, encoding, pretty);
+        }
+
         public override string ToString()
         {
             return ToString(Encoding.UTF8);
@@ -232,7 +242,7 @@ namespace Flexo
 
         public string ToString(Encoding encoding, bool pretty = false)
         {
-            return new StreamReader(Encoder.Encode(this, encoding, pretty)).ReadToEnd();
+            return new StreamReader(Encode(encoding, pretty)).ReadToEnd();
         }
 
         public IEnumerator<JElement> GetEnumerator()

@@ -5,6 +5,17 @@ namespace Flexo
 {
     public interface IJsonEncoder
     {
-        Stream Encode(JElement jsonElement, Encoding encoding = null, bool pretty = false);
+        void Encode(JElement jsonElement, Stream stream, Encoding encoding = null, bool pretty = false);
+    }
+
+    public static class JsonEncodeExtensions
+    {
+        public static Stream Encode(this IJsonEncoder encoder, JElement jsonElement, Encoding encoding = null, bool pretty = false)
+        {
+            var stream = new MemoryStream();
+            encoder.Encode(jsonElement, stream, encoding, pretty);
+            stream.Position = 0;
+            return stream;
+        }
     }
 }

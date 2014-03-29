@@ -407,7 +407,7 @@ namespace Tests
 
             Console.Write("Control: {0}, Flexo: {1}", controlBenchmark, flexoBenchmark);
 
-            flexoBenchmark.ShouldBeLessThan(controlBenchmark * 1.5);
+            flexoBenchmark.ShouldBeLessThan(controlBenchmark * 2);
         }
     }
 }
