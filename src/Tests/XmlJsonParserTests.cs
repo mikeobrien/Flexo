@@ -49,6 +49,17 @@ namespace Tests
             #endif
         }
 
+        [Test]
+        public void should_fail_on_quoted_json()
+        {
+            var exception = Assert.Throws<JsonParseException>(() => _parser.Parse("\"{}\"".ToStream()));
+            #if __MonoCS__
+            exception.Message.ShouldEqual("Unexpected end of object (1,13)");
+            #else
+            exception.Message.ShouldEqual("A string is not a valid json root element type. The root can only be an object or array.");
+            #endif
+        }
+
         // Empty root object
 
         [Test]

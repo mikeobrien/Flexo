@@ -55,8 +55,8 @@ namespace Flexo
             {
                 case ElementType.Object: return ElementType.Object;
                 case ElementType.Array: return ElementType.Array;
-                default: throw new JsonParseException("'{0}' is not a valid json root element type. " +
-                    "The root can only be an object or array.".ToFormat(elementType));
+                default: throw new JsonParseException(("A {0} is not a valid json root element type. " +
+                    "The root can only be an object or array.").ToFormat(elementType.ToString().ToLower()));
             }
         }
 
