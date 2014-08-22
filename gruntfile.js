@@ -28,8 +28,8 @@ module.exports = function(grunt) {
             }
         },
         nunit: {
+            files: ['src/Flexo.sln'],
             options: {
-                files: ['src/Flexo.sln'],
                 teamcity: true
             }
         },
