@@ -1,6 +1,8 @@
 Flexo [![Build Status](https://travis-ci.org/mikeobrien/Flexo.png?branch=master)](https://travis-ci.org/mikeobrien/Flexo)
 =============
 
+[![Nuget](http://img.shields.io/nuget/v/Flexo.svg)](http://www.nuget.org/packages/Flexo/) [![Nuget downloads](http://img.shields.io/nuget/dt/Flexo.svg)](http://www.nuget.org/packages/Flexo/)
+
 <img src="https://raw.github.com/mikeobrien/Flexo/master/misc/logo.png"/> 
 
 Flexo is a simple JSON parser/encoder for .NET and Mono.
