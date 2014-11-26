@@ -1,7 +1,7 @@
 Flexo
 =============
 
-[![Build Status](https://travis-ci.org/mikeobrien/Flexo.png?branch=master)](https://travis-ci.org/mikeobrien/Flexo) [![Nuget](http://img.shields.io/nuget/v/Flexo.svg)](http://www.nuget.org/packages/Flexo/) [![Nuget downloads](http://img.shields.io/nuget/dt/Flexo.svg)](http://www.nuget.org/packages/Flexo/)
+[![Nuget](http://img.shields.io/nuget/v/Flexo.svg)](http://www.nuget.org/packages/Flexo/) [![Nuget downloads](http://img.shields.io/nuget/dt/Flexo.svg)](http://www.nuget.org/packages/Flexo/) [![Build Status](https://travis-ci.org/mikeobrien/Flexo.png?branch=master)](https://travis-ci.org/mikeobrien/Flexo) 
 
 <img src="https://raw.github.com/mikeobrien/Flexo/master/misc/logo.png"/> 
 
