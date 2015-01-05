@@ -16,7 +16,4 @@
       <iconUrl>https://github.com/mikeobrien/Flexo/raw/master/misc/logo.png</iconUrl>
       <tags>json</tags>
    </metadata>
-   <files>
-      <file src="src\Flexo\bin\Release\Flexo.*" target="lib" />
-   </files>
 </package>
