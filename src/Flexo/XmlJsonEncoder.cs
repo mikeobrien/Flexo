@@ -15,9 +15,7 @@ namespace Flexo
             {
                 var xmlElement = new XElement(XmlJson.RootElementName);
                 Save(jsonElement, xmlElement);
-                // Whitespace is only supported in >= 4.5:
-                // using (var writer = JsonReaderWriterFactory.CreateJsonWriter(stream, encoding, false, pretty))
-                using (var writer = JsonReaderWriterFactory.CreateJsonWriter(stream, encoding ?? Encoding.UTF8, false))
+                using (var writer = JsonReaderWriterFactory.CreateJsonWriter(stream, encoding ?? Encoding.UTF8, false, pretty))
                 {
                     xmlElement.Save(writer);
                     writer.Flush();

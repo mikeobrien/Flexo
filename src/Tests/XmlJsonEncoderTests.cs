@@ -270,12 +270,12 @@ namespace Tests
 
         // Whitespace
 
-        [Test, Ignore("Whitespace is not supported in 4.0 but is supported in 4.5.")]
+        [Test]
         public void should_save_with_whitespace()
         {
             var element = new JElement(ElementType.Object);
             element.AddValueMember("field1", "hai");
-            _encoder.Encode(element).ShouldEqual("{\r\n  \"field1\": \"hai\"\r\n}");
+            _encoder.Encode(element, pretty: true).ShouldEqual("{\r\n  \"field1\": \"hai\"\r\n}");
         }
 
         // Performance
