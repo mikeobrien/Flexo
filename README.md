@@ -1,7 +1,7 @@
 Flexo
 =============
 
-[![Nuget](http://img.shields.io/nuget/v/Flexo.svg?style=flat)](http://www.nuget.org/packages/Flexo/) [![Nuget downloads](http://img.shields.io/nuget/dt/Flexo.svg?style=flat)](http://www.nuget.org/packages/Flexo/) [![Travis CI Build Status](http://img.shields.io/travis/mikeobrien/Flexo.svg?style=flat&label=Travis%20CI)](https://travis-ci.org/mikeobrien/Flexo) [![TeamCity Build Status](https://img.shields.io/teamcity/http/build.mikeobrien.net/s/Flexo.svg?style=flat&label=TeamCity)](http://build.mikeobrien.net/viewType.html?buildTypeId=Flexo&guest=1)
+[![Nuget](http://img.shields.io/nuget/v/Flexo.svg?style=flat)](http://www.nuget.org/packages/Flexo/) [![Travis CI Build Status](http://img.shields.io/travis/mikeobrien/Flexo.svg?style=flat&label=Travis%20CI)](https://travis-ci.org/mikeobrien/Flexo) [![TeamCity Build Status](https://img.shields.io/teamcity/http/build.mikeobrien.net/s/Flexo.svg?style=flat&label=TeamCity)](http://build.mikeobrien.net/viewType.html?buildTypeId=Flexo&guest=1)
 
 <img src="https://raw.github.com/mikeobrien/Flexo/master/misc/logo.png"/> 
 
