@@ -37,7 +37,7 @@ namespace Flexo
             else jsonElement.ForEach(x => Save(x, CreateElement(jsonElement.IsArray, x, xmlElement)));
         }
 
-        private XElement CreateElement(bool isArrayItem, JElement jsonElement, XElement xmlElement)
+        private static XElement CreateElement(bool isArrayItem, JElement jsonElement, XElement xmlElement)
         {
             var name = isArrayItem ? XmlJson.ArrayItemElementName : jsonElement.Name;
             if (isArrayItem || name.IsValidXmlName()) return xmlElement.CreateElement(name);
@@ -61,24 +61,13 @@ namespace Flexo
             }
         }
 
-        private string SerializeGeneral(object obj)
+        private string SerializeGeneral(object value)
         {
-            if (obj == null)
-            {
-                return null;
-            }
-            
-            Type objType = obj.GetType();
-            
-            if (typeof(IConvertible).IsAssignableFrom(objType)) //Hear all common value types
-            {
-                return (string)Convert.ChangeType(obj, typeof(string), DefaultCulture);
-            }
-
-            return obj.ToString();
+            return !(value is IConvertible) ? null :
+                (string)Convert.ChangeType(value, typeof(string), DefaultCulture);
         }
 
-        private void SetElementType(XElement xmlElement, ElementType type)
+        private static void SetElementType(XElement xmlElement, ElementType type)
         {
             string typeName;
             switch (type)
@@ -89,7 +78,7 @@ namespace Flexo
                 case ElementType.String: typeName = XmlJson.String; break;
                 case ElementType.Number: typeName = XmlJson.Number; break;
                 case ElementType.Boolean: typeName = XmlJson.Boolean; break;
-                default: throw new ArgumentException(String.Format("Unknown ElementType value '{0}'.", type));
+                default: throw new ArgumentException($"Unknown ElementType value '{type}'.");
             }
             xmlElement.Add(new XAttribute(XmlJson.TypeAttribute, typeName));
         }
